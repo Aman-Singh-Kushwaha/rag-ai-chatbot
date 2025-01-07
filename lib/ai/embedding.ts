@@ -8,7 +8,7 @@ const generateChunks = (input:string) : string[] => {
           .trim()
           .split('.')
           .filter(i=> i!=='');
-}
+};
 
 export const generateEmbeddings= async (
   value:string
@@ -17,8 +17,8 @@ export const generateEmbeddings= async (
   const {embeddings} = await embedMany({
     model: embeddingModel,
     values: chunks,
-    });
+  });
   return embeddings.map((e,i)=> (
     {embedding:e , content: chunks[i]}
   ));
-}
+};
