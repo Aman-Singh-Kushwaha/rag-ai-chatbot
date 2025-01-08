@@ -17,10 +17,9 @@ export const createResource = async (input: NewResourceParams) => {
     
     const embeddings = await generateEmbeddings(content);
     await db.insert(embeddingsTable).values(
-      embeddings.map(e =>({
+      embeddings.map(embedding =>({
         resourceId: resource.id,
-        embeddings: e.embedding,
-        content: e.content,
+        ...embedding,
       }))
     );
 
