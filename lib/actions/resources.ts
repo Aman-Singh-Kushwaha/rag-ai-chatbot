@@ -1,4 +1,4 @@
-`use server`
+'use server'
 
 import { NewResourceParams, insertResourceSchema, resources } from "../db/schema/resources";
 import {db} from '../db'
@@ -13,12 +13,12 @@ export const createResource = async (input: NewResourceParams) => {
     const [resource] = await db
       .insert(resources)
       .values({content})
-      .returning();
+      .returning({ id: resources.id });
     
     const embeddings = await generateEmbeddings(content);
     await db.insert(embeddingsTable).values(
       embeddings.map(embedding =>({
-        resourceId: resource.id,
+        resourceId: resource.id as string,
         ...embedding,
       }))
     );
